@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presente Especial</title>
+  <style>
+    /* Estilização geral da página */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(to right, #ffafbd, #ffc3a0);
+      overflow-y: auto; /* Permite rolagem vertical */
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #fff;
+      margin: 20px 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Slider de imagens */
+    .slider {
+      width: auto; /* Ajusta a largura automaticamente ao conteúdo */
+      max-width: 320px; /* Limite máximo de largura */
+      overflow: hidden;
+      position: relative;
+      border-radius: 15px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%; /* Imagem ocupa a largura total do contêiner */
+      height: auto; /* Ajusta a altura proporcionalmente */
+      object-fit: cover;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: -40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #fff;
+    }
+
+    /* Texto personalizado */
+    #texto {
+      width: 80%;
+      text-align: center;
+      font-size: 1.7em; /* Aumentado para melhor legibilidade */
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Contador estilizado */
+    #contador {
+      font-size: 2em;
+      color: #fff;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px; /* Ajuste para deixar mais próximo */
+      text-align: center;
+    }
+
+    /* Botão para o link do YouTube */
+    #link-musica {
+      padding: 10px 30px;
+      font-size: 1.2em;
+      background-color: #ff69b4;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+
+    #link-musica:hover {
+      background-color: #ff85b2;
+    }
+
+    /* Efeito dos corações caindo */
+    .heart {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 1.5em;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Anna & Júlio</h1>
+
+  <div class="slider">
+    <div class="slides">
+      <img src="https://i.imgur.com/Y1r2JLA.jpeg" alt="Imagem 1">
+      <img src="https://i.imgur.com/TiYZT43.jpeg" alt="Imagem 2">
+      <img src="https://i.imgur.com/TdN8czU.jpeg" alt="Imagem 3">
+      <img src="https://i.imgur.com/c9rLtr7.jpeg" alt="Imagem 4">
+      <img src="https://i.imgur.com/gHUO79K.jpeg" alt="Imagem 5">
+      <img src="https://i.imgur.com/uHtY51f.jpeg" alt="Imagem 6">
+      <img src="https://i.imgur.com/hQ5yea1.jpeg" alt="Imagem 7">
+      <img src="https://i.imgur.com/zdDqoG2.jpeg" alt="Imagem 8">
+    </div>
+    <div class="buttons">
+      <button onclick="prevSlide()">◀</button>
+      <button onclick="nextSlide()">▶</button>
+    </div>
+  </div>
+
+  <div id="texto">Amor, eu te amo muito. Eu venho atravez dessa cartinha te dizer, que eu te amo muito e que você foi uma das melhores
+    pessoas que chegaram em minha vida, eu te amo muito. Eu não sei fazer textinho mas eu faço o possivel para você. E quero que
+    você saiba, que eu te amo independente de qualquer coisa, você ê perfeita linda e magnifica, e eu tenho certeza que vamos ficar juntos até o fim, porque quando almas
+    gemêas se encontram é impossivel separa-las. EU TE AMO.</div>
+  
+  <div id="contador"></div>
+
+  <a id="link-musica" href="https://youtu.be/PPGjmXlWyc4?si=IAkmJ_3eni5BebJc" target="_blank">Clique aqui</a>
+
+  <script>
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      const slides = document.querySelector('.slides');
+      const totalSlides = document.querySelectorAll('.slides img').length;
+      currentIndex = (index + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 320}px)`;
+    }
+
+    function nextSlide() {
+      showSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentIndex - 1);
+    }
+
+    function elapsedCounter() {
+      const startDate = new Date("2024-07-12T00:00:00");
+      const now = new Date();
+      let distance = now - startDate;
+
+      // Cálculo dos meses, dias, horas, minutos e segundos
+      const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30.44)); // Aproximação de 30,44 dias por mês
+      distance -= months * (1000 * 60 * 60 * 24 * 30.44);
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("contador").innerHTML = 
+        `${months} meses, ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos desde 12/07/2024.`;
+    }
+
+    setInterval(elapsedCounter, 1000);
+
+    function createHearts() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+      heart.innerHTML = "❤️";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHearts, 300);
+  </script>
+</body>
+</html>
